@@ -1,0 +1,11 @@
+ #cloning an public repo and uploading as private
+ 13  git config --global user.name "gopal das"
+   14  git config --global user.email "gopal1409@gmail.com"
+   15  git clone https://github.com/gopal1409/springboot-chat-app.git
+   17  cd springboot-chat-app/
+   18  rm -rf .git
+   19  git init
+   20  git add .
+   22  git commit -m "my spring app"
+   23  git log
+
