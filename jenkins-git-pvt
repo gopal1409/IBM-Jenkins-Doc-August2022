@@ -12,3 +12,7 @@
 ###how to generate ssh key and get the public key
  25  ssh-keygen -t rsa
    26  cat /root/.ssh/id_rsa.pub
+   ###aDD REMOTE REPO AND PUSH IT
+    28  git remote add origin git@github.com:gopal1409/ibm-chat-app.git
+   29  git push -u origin master
+
