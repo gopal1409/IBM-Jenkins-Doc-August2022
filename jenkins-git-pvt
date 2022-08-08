@@ -16,3 +16,6 @@
     28  git remote add origin git@github.com:gopal1409/ibm-chat-app.git
    29  git push -u origin master
 
+####how to install maven
+apt install maven
+mvn --version
