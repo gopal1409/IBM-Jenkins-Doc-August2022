@@ -6,5 +6,10 @@ pipeline {
                 git credentialsId: 'git-token', url: 'git@github.com:gopal1409/ibmchatapp.git'
             }
         }
+        stage('mvn pacakge') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
     }
 }
