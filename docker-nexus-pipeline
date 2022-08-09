@@ -23,5 +23,15 @@ pipeline {
                 }
             }
         }
+        stage('docker push') {
+            steps {
+                script {
+                    // This step should not normally be used in your script. Consult the inline help for details.
+                    withDockerRegistry(credentialsId: 'nexus-cred', url: 'http://54.243.105.5:8085') {
+                         dockerImage.push()
+                     }
+                }
+            }
+        }
     }
 }
