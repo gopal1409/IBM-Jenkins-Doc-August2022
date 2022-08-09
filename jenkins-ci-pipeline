@@ -12,12 +12,18 @@ pipeline {
             }
         }
         stage('Unit test') {
+            when {
+                expression {choice == '1'}
+            }
             steps {
                 sh 'mvn test'
                 junit 'target/surefire-reports/*.xml'
             }
         }
         stage('checkstyle') {
+            when {
+                expression {choice == '2'}
+            }
             steps {
                 sh 'mvn checkstyle:checkstyle'
                 recordIssues(tools: [checkStyle(pattern: '**/checkstyle-result.xml')])
@@ -25,6 +31,9 @@ pipeline {
             }
         }
          stage('code coverage') {
+             when {
+                expression {choice == '3'}
+            }
             steps {
                 jacoco()
             }
@@ -35,6 +44,11 @@ pipeline {
   -Dsonar.projectKey=chatapp \
   -Dsonar.host.url=http://44.198.232.237:9000 \
   -Dsonar.login=sqp_da2f8ea2e19a10d16c2984e3fb99aa0b0481b6c0'
+            }
+        }
+        stage('nexus') {
+            steps {
+                nexusArtifactUploader artifacts: [[artifactId: 'websocket-demo', classifier: '', file: 'target/websocket-demo-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexus-cred', groupId: 'websocket-demo', nexusUrl: '54.243.105.5:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '0.0.1-SNAPSHOT'
             }
         }
     }
