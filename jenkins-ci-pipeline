@@ -29,5 +29,13 @@ pipeline {
                 jacoco()
             }
         }
+        stage('sonar') {
+            steps {
+                sh 'mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=chatapp \
+  -Dsonar.host.url=http://44.198.232.237:9000 \
+  -Dsonar.login=sqp_da2f8ea2e19a10d16c2984e3fb99aa0b0481b6c0'
+            }
+        }
     }
 }
