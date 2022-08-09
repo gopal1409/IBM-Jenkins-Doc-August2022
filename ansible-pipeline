@@ -1,5 +1,9 @@
 pipeline {
-    
+    environment {
+        registry = '54.243.105.5:8085/chatapp'
+        registryCredential = 'nexus-cred'
+        dockerImage = ''
+    }
     agent any
     stages {
         stage('code scm') {
@@ -14,7 +18,7 @@ pipeline {
         }
         stage('ansible deploy') {
             steps {
-             echo "hi"
+             ansiblePlaybook credentialsId: 'ansible-key', disableHostKeyChecking: true, inventory: 'dev.inv', playbook: 'docker.yaml'
           }
         }
     }
